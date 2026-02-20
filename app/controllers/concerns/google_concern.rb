@@ -15,6 +15,6 @@ module GoogleConcern
   private
 
   def scope
-    'email profile https://mail.google.com/'
+    'email profile https://mail.google.com/ https://www.googleapis.com/auth/calendar.readonly'
   end
 end
