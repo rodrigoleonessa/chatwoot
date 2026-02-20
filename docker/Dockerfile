@@ -13,6 +13,9 @@ ARG BUNDLE_WITHOUT="development:test"
 ENV BUNDLE_WITHOUT ${BUNDLE_WITHOUT}
 ENV BUNDLER_VERSION=2.5.16
 
+ARG GIT_SHA
+ENV GIT_SHA=${GIT_SHA}
+
 ARG RAILS_SERVE_STATIC_FILES=true
 ENV RAILS_SERVE_STATIC_FILES ${RAILS_SERVE_STATIC_FILES}
 
@@ -87,13 +90,19 @@ RUN if [ "$RAILS_ENV" = "production" ]; then \
   fi
 
 # Generate .git_sha file with current commit hash
-RUN git rev-parse HEAD > /app/.git_sha
+RUN if [ -n "$GIT_SHA" ]; then \
+  echo "$GIT_SHA" > /app/.git_sha; \
+  elif [ -d ".git" ]; then \
+  git rev-parse HEAD > /app/.git_sha; \
+  else \
+  echo "unknown" > /app/.git_sha; \
+  fi
 
 # Remove unnecessary files
 RUN rm -rf /gems/ruby/3.4.0/cache/*.gem \
   && find /gems/ruby/3.4.0/gems/ \( -name "*.c" -o -name "*.o" \) -delete \
-  && rm -rf .git \
-  && rm .gitignore
+  && (rm -rf .git || true) \
+  && (rm .gitignore || true)
 
 # final build stage
 FROM ruby:3.4.4-alpine3.21
