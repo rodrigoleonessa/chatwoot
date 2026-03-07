@@ -1,0 +1,12 @@
+{
+  "CALENDAR": {
+    "TITLE": "Calendar",
+    "REFRESH": "Refresh",
+    "CONNECT_TITLE": "Connect your Google Calendar",
+    "CONNECT_DESCRIPTION": "Connect your Google Calendar to see your upcoming events and manage your schedule directly from Chatwoot.",
+    "CONNECT_BUTTON": "Connect Google Calendar",
+    "NO_EVENTS": "No upcoming events",
+    "FETCH_ERROR": "Failed to fetch calendar events",
+    "OPEN_LINK": "Open"
+  }
+}

@@ -8,6 +8,7 @@ export default defineConfig({
   vite: {
     server: {
       port: 6179,
+      host: '127.0.0.1',
     },
   },
   viteIgnorePlugins: ['vite-plugin-ruby'],

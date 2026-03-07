@@ -1,5 +1,5 @@
-
 import { frontendURL } from '../../../helper/URLHelper';
+import { ROLES } from 'dashboard/constants/permissions.js';
 
 const Calendar = () => import('./Calendar.vue');
 
@@ -8,8 +8,10 @@ export default {
     {
       path: frontendURL('accounts/:accountId/calendar'),
       name: 'calendar_index',
-      roles: ['administrator', 'agent'],
       component: Calendar,
+      meta: {
+        permissions: [...ROLES],
+      },
     },
   ],
 };
